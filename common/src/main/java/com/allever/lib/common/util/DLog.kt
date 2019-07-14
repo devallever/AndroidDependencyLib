@@ -7,15 +7,24 @@ object DLog {
 
     private val TAG = DLog::class.java.simpleName
 
-    fun d(msg: String) {
+
+    fun d(msg: String?) {
+        d(TAG, msg)
+    }
+
+    fun d(tag: String, msg: String?) {
         if (BuildConfig.DEBUG) {
-            Log.d(TAG, msg)
+            Log.d(tag, msg)
         }
     }
 
     fun e(msg: String) {
+        e(TAG, msg)
+    }
+
+    fun e(tag: String, msg: String?) {
         if (BuildConfig.DEBUG) {
-            Log.e(TAG, msg)
+            Log.e(tag, msg)
         }
     }
 }
