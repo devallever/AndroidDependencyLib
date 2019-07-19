@@ -6,10 +6,34 @@ import java.io.*
 
 object FileUtils {
 
-    fun readTextFile(path: String): String {
+    /**
+     * 检查文件是否存在
+     *
+     * @param path 文件的路径
+     * @return 文件是否存在
+     */
+    fun checkExist(path: String?): Boolean {
+        if (TextUtils.isEmpty(path)) {
+            return false
+        }
+
+        return try {
+            val file = File(path)
+            file.exists()
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    /***
+     * 读取文本文件
+     * @param path 路径
+     * @return 文本内容
+     */
+    fun readTextFile(path: String?): String {
         var result = ""
 
-        if (TextUtils.isEmpty(path)) return result
+        if (checkExist(path)) return result
 
         try {
             result = readTextFileFromInputStream(FileInputStream(path))
@@ -20,14 +44,20 @@ object FileUtils {
         return result
     }
 
-    fun readAssetsTextFile(path: String): String {
+    /***
+     * 读取assets目录的文本文件
+     * @param path 路径
+     * @return 文本内容
+     */
+    fun readAssetsTextFile(path: String?): String {
         var result = ""
 
-        if (TextUtils.isEmpty(path)) return result
+        if (checkExist(path)) return result
 
         try {
             val assetManager = App.context.assets
-            result = readTextFileFromInputStream(assetManager.open(path))
+            //path不可能为null
+            result = readTextFileFromInputStream(assetManager.open(path!!))
         } catch (e: IOException) {
             e.printStackTrace()
         }
