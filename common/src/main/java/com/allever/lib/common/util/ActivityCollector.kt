@@ -15,10 +15,9 @@
  * limitations under the License.
  */
 
-package com.quxianggif.util
+package com.allever.lib.common.util
 
 import android.app.Activity
-import com.allever.lib.common.util.DLog
 import java.lang.ref.WeakReference
 import java.util.*
 

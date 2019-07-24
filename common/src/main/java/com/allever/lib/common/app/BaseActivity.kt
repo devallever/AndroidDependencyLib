@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.allever.lib.common.R
 import com.allever.lib.common.util.DLog
 import com.allever.lib.common.util.ToastUtils
-import com.quxianggif.util.ActivityCollector
+import com.allever.lib.common.util.ActivityCollector
 import java.lang.ref.WeakReference
 
 abstract class BaseActivity : AppCompatActivity() {

@@ -1,7 +1,6 @@
 package com.allever.lib.common.app
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.allever.lib.common.util.DLog
 
 open class BaseFragment : androidx.fragment.app.Fragment() {
