@@ -1,4 +1,4 @@
-package com.allever.lib.imageloader;
+package com.allever.lib.httpsglide;
 
 import org.junit.Test;
 

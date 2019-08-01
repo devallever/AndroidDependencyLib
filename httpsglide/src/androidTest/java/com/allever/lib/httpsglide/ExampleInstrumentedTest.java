@@ -1,4 +1,4 @@
-package com.allever.lib.imageloader;
+package com.allever.lib.httpsglide;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.allever.lib.imageloader.test", appContext.getPackageName());
+        assertEquals("com.allever.lib.httpsglide.test", appContext.getPackageName());
     }
 }
