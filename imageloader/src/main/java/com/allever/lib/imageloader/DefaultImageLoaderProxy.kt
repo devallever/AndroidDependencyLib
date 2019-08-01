@@ -5,7 +5,8 @@ import android.graphics.BitmapFactory
 import android.widget.ImageView
 import java.io.File
 
-object DefaultImageLoaderProxy: ImageLoaderProxy{
+class DefaultImageLoaderProxy: ImageLoaderProxy{
+
     override fun loadImage(context: Context, url: String, imageView: ImageView) {
 
     }
@@ -16,6 +17,13 @@ object DefaultImageLoaderProxy: ImageLoaderProxy{
 
     override fun loadImage(context: Context, resId: Int, imageView: ImageView) {
         imageView.setImageResource(resId)
+    }
+
+    override fun resumeRequest(context: Context) {
+
+    }
+
+    override fun stopRequest(context: Context) {
     }
 
 }

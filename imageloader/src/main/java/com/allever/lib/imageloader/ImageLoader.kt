@@ -6,7 +6,7 @@ import java.io.File
 
 object ImageLoader {
 
-    private var mProxy: ImageLoaderProxy? = DefaultImageLoaderProxy
+    private var mProxy: ImageLoaderProxy? = DefaultImageLoaderProxy()
 
     fun setProxy(proxy: ImageLoaderProxy) {
         mProxy = proxy
