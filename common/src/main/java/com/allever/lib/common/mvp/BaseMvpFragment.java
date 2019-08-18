@@ -1,0 +1,39 @@
+package com.allever.lib.common.mvp;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import com.allever.lib.common.app.BaseFragment;
+import org.jetbrains.annotations.NotNull;
+
+
+/**
+ * Created by Mac on 18/3/1.
+ */
+
+public abstract class BaseMvpFragment<V, T extends BasePresenter<V>> extends BaseFragment {
+    protected T mPresenter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NotNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mPresenter = createPresenter();
+        mPresenter.attachView((V) this);
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        mPresenter.detachView();
+        super.onDestroyView();
+    }
+
+    protected abstract T createPresenter();
+}
