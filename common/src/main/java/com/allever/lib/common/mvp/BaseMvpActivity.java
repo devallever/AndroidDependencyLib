@@ -9,9 +9,9 @@ import com.allever.lib.common.app.BaseActivity;
  * Created by allever on 18-2-28.
  */
 
-public abstract class BaseMvpActivity<V, T extends BasePresenter<V>> extends BaseActivity {
+public abstract class BaseMvpActivity<V, P extends BasePresenter<V>> extends BaseActivity {
 
-    protected T mPresenter;
+    protected P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,5 +27,5 @@ public abstract class BaseMvpActivity<V, T extends BasePresenter<V>> extends Bas
         super.onDestroy();
     }
 
-    protected abstract T createPresenter();
+    protected abstract P createPresenter();
 }

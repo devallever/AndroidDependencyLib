@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
  * Created by Mac on 18/3/1.
  */
 
-public abstract class BaseMvpFragment<V, T extends BasePresenter<V>> extends BaseFragment {
-    protected T mPresenter;
+public abstract class BaseMvpFragment<V, P extends BasePresenter<V>> extends BaseFragment {
+    protected P mPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,5 +35,5 @@ public abstract class BaseMvpFragment<V, T extends BasePresenter<V>> extends Bas
         super.onDestroyView();
     }
 
-    protected abstract T createPresenter();
+    protected abstract P createPresenter();
 }
