@@ -28,6 +28,8 @@ object PermissionManager {
     }
 
     fun hasPermissions(vararg permissions: String): Boolean {
+        return PermissionCompat.hasPermission(App.context, *permissions)
+        //下面这种方式会有意想不到的bug，例如通过这个判断后原来的相机会停止预览
         return AndPermission.hasPermissions(App.context, permissions)
     }
 
@@ -45,5 +47,10 @@ object PermissionManager {
         }
         builder.setNegativeButton(R.string.permission_cancel, cancelListener)
         builder.show()
+    }
+
+    @Deprecated("")
+    fun jumpPermissionSetting() {
+        JumpSettingActivity.start(App.context)
     }
 }
