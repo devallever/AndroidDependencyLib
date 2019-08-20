@@ -51,6 +51,6 @@ object PermissionManager {
 
     @Deprecated("")
     fun jumpPermissionSetting() {
-        JumpSettingActivity.start(App.context)
+//        JumpSettingActivity.start(App.context)
     }
 }
