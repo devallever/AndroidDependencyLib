@@ -4,6 +4,7 @@ import android.content.Context
 import android.support.annotation.IntRange
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.ViewGroup
 
 import java.util.ArrayList
@@ -17,6 +18,7 @@ import java.util.ArrayList
 abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseViewHolder> {
     protected var mContext: Context
     protected var mLayoutResId: Int = 0
+    var mItemListener: ItemListener? = null
     var mData: MutableList<T>
 
     constructor(context: Context, @LayoutRes layoutRes: Int) {
@@ -38,6 +40,12 @@ abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseViewHolder>
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            mItemListener?.onItemClick(position, holder)
+        }
+        holder.itemView.setOnLongClickListener {
+            return@setOnLongClickListener mItemListener?.onItemLongClick(position, holder)?: false
+        }
         bindHolder(holder, position, mData[position])
     }
 
@@ -68,6 +76,10 @@ abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseViewHolder>
         val internalPosition = position
         notifyItemRemoved(internalPosition)
         notifyItemRangeChanged(internalPosition, mData.size - internalPosition)
+    }
+
+    fun setItemListener(itemListener: ItemListener) {
+        mItemListener = itemListener
     }
 
     private fun compatibilityDataSizeChanged(size: Int) {
