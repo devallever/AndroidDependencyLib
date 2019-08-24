@@ -5,7 +5,7 @@ import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import com.allever.lib.common.util.DLog
 
-open class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity: AppCompatActivity() {
     protected val mHandler = Handler()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
