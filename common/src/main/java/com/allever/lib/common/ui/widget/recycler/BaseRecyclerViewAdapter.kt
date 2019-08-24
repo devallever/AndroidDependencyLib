@@ -4,7 +4,6 @@ import android.content.Context
 import android.support.annotation.IntRange
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
-import android.view.View
 import android.view.ViewGroup
 
 import java.util.ArrayList
@@ -59,6 +58,10 @@ abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseViewHolder>
         notifyDataSetChanged()
     }
 
+    fun updateData(position: Int) {
+        notifyItemChanged(position, position)
+    }
+
     fun addData(@IntRange(from = 0) position: Int, data: T) {
         mData.add(position, data)
         notifyItemInserted(position)
@@ -73,9 +76,8 @@ abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseViewHolder>
 
     fun remove(position: Int) {
         mData.removeAt(position)
-        val internalPosition = position
-        notifyItemRemoved(internalPosition)
-        notifyItemRangeChanged(internalPosition, mData.size - internalPosition)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, mData.size - position)
     }
 
     fun setItemListener(itemListener: ItemListener) {
