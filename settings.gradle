@@ -1,1 +1,1 @@
-include ':app', ':common', ':permission', ':imageloader', ':glideloader', ':httpsglide'
+include ':app', ':common', ':permission', ':imageloader', ':glideloader', ':httpsglide',':umeng'
