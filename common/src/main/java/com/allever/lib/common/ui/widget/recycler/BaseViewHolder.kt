@@ -5,9 +5,9 @@ import android.graphics.Bitmap
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.support.annotation.IdRes
-import android.support.v4.util.SparseArrayCompat
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.IdRes
+import androidx.collection.SparseArrayCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
@@ -18,8 +18,8 @@ import android.widget.ProgressBar
 import android.widget.RatingBar
 import android.widget.TextView
 
-class BaseViewHolder(private val mContext: Context, itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val mViews: SparseArrayCompat<View> = SparseArrayCompat()
+class BaseViewHolder(private val mContext: Context, itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    private val mViews: androidx.collection.SparseArrayCompat<View> = androidx.collection.SparseArrayCompat()
 
     fun <V : View> getView(@IdRes res: Int): V? {
         var v: View? = mViews.get(res)
