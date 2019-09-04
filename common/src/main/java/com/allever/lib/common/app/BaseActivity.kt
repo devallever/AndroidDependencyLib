@@ -10,7 +10,7 @@ import com.allever.lib.common.util.ToastUtils
 import com.quxianggif.util.ActivityCollector
 import java.lang.ref.WeakReference
 
-abstract class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
     protected val mHandler = Handler()
     private var mWeakRefActivity: WeakReference<Activity>? = null
     override fun onCreate(savedInstanceState: Bundle?) {

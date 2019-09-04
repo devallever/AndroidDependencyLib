@@ -10,7 +10,7 @@ import com.allever.lib.permission.PermissionListener
 import com.allever.lib.permission.PermissionManager
 import com.allever.lib.permission.R
 
-class PermissionTestActivity: AppCompatActivity() {
+class PermissionTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permission_test)

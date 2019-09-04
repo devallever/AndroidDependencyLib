@@ -3,7 +3,6 @@ package com.allever.lib.common.ui.widget.recycler
 import android.content.Context
 import androidx.annotation.IntRange
 import androidx.annotation.LayoutRes
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 
 import java.util.ArrayList
@@ -43,7 +42,7 @@ abstract class BaseRecyclerViewAdapter<T> : androidx.recyclerview.widget.Recycle
             mItemListener?.onItemClick(position, holder)
         }
         holder.itemView.setOnLongClickListener {
-            return@setOnLongClickListener mItemListener?.onItemLongClick(position, holder)?: false
+            return@setOnLongClickListener mItemListener?.onItemLongClick(position, holder) ?: false
         }
         bindHolder(holder, position, mData[position])
     }

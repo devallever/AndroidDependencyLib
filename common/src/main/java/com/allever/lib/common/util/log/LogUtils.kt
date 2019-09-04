@@ -8,11 +8,11 @@ object LogUtils {
         mProxy = logger
     }
 
-    fun d(tag: String, msg: String){
+    fun d(tag: String, msg: String) {
         mProxy.d(msg)
     }
 
-    fun d(msg: String){
+    fun d(msg: String) {
         mProxy.d(msg)
     }
 

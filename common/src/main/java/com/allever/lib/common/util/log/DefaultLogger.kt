@@ -2,10 +2,11 @@ package com.allever.lib.common.util.log
 
 import android.util.Log
 
-class DefaultLogger: ILogger {
+class DefaultLogger : ILogger {
     companion object {
         private const val TAG = "ILogger"
     }
+
     override fun d(tag: String, msg: String) {
         Log.d(tag, msg)
     }

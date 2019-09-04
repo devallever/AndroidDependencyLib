@@ -18,7 +18,8 @@ import android.widget.ProgressBar
 import android.widget.RatingBar
 import android.widget.TextView
 
-class BaseViewHolder(private val mContext: Context, itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+class BaseViewHolder(private val mContext: Context, itemView: View) :
+    androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
     private val mViews: androidx.collection.SparseArrayCompat<View> = androidx.collection.SparseArrayCompat()
 
     fun <V : View> getView(@IdRes res: Int): V? {
@@ -117,7 +118,7 @@ class BaseViewHolder(private val mContext: Context, itemView: View) : androidx.r
     fun setTypeface(typeface: Typeface, vararg viewIds: Int): BaseViewHolder {
         for (viewId in viewIds) {
             val view = getView<TextView>(viewId)
-            view?: continue
+            view ?: continue
             view.typeface = typeface
             view.paintFlags = view.paintFlags or Paint.SUBPIXEL_TEXT_FLAG
         }
@@ -177,22 +178,28 @@ class BaseViewHolder(private val mContext: Context, itemView: View) : androidx.r
     /**
      * 关于事件的
      */
-    fun setOnClickListener(viewId: Int,
-                           listener: View.OnClickListener): BaseViewHolder {
+    fun setOnClickListener(
+        viewId: Int,
+        listener: View.OnClickListener
+    ): BaseViewHolder {
         val view = getView<View>(viewId)
         view?.setOnClickListener(listener)
         return this
     }
 
-    fun setOnTouchListener(viewId: Int,
-                           listener: View.OnTouchListener): BaseViewHolder {
+    fun setOnTouchListener(
+        viewId: Int,
+        listener: View.OnTouchListener
+    ): BaseViewHolder {
         val view = getView<View>(viewId)
         view?.setOnTouchListener(listener)
         return this
     }
 
-    fun setOnLongClickListener(viewId: Int,
-                               listener: View.OnLongClickListener): BaseViewHolder {
+    fun setOnLongClickListener(
+        viewId: Int,
+        listener: View.OnLongClickListener
+    ): BaseViewHolder {
         val view = getView<View>(viewId)
         view?.setOnLongClickListener(listener)
         return this
@@ -202,8 +209,10 @@ class BaseViewHolder(private val mContext: Context, itemView: View) : androidx.r
 
         fun getHolder(context: Context, parent: ViewGroup, layoutId: Int): BaseViewHolder {
 
-            val itemView = LayoutInflater.from(context).inflate(layoutId, parent,
-                    false)
+            val itemView = LayoutInflater.from(context).inflate(
+                layoutId, parent,
+                false
+            )
             val holder = BaseViewHolder(context, itemView)
             itemView.tag = holder
             return holder
