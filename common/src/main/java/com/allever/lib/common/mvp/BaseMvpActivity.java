@@ -18,7 +18,8 @@ public abstract class BaseMvpActivity<V, P extends BasePresenter<V>> extends Bas
         super.onCreate(savedInstanceState);
 
         mPresenter = createPresenter();
-        mPresenter.attachView((V) this); //view 与 Presenter 关联
+        //view 与 Presenter 关联
+        mPresenter.attachView((V) this);
     }
 
     @Override
