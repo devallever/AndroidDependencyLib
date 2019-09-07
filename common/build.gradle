@@ -49,6 +49,7 @@ dependencies {
     testApi 'junit:junit:4.12'
     androidTestApi 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestApi 'androidx.test:runner:1.2.0'
+    api 'androidx.multidex:multidex:2.0.1'
 
 }
 repositories {
