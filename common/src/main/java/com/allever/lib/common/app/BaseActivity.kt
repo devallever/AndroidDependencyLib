@@ -30,7 +30,7 @@ abstract class BaseActivity : AppCompatActivity() {
         if (System.currentTimeMillis() - firstPressedBackTime < 2000) {
             super.onBackPressed()
         } else {
-            ToastUtils.show(getString(R.string.click_again_to_exit))
+            ToastUtils.show(getString(R.string.common_click_again_to_exit))
             firstPressedBackTime = System.currentTimeMillis()
         }
     }

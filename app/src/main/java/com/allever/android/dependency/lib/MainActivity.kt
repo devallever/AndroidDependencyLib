@@ -15,6 +15,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         mIv = findViewById(R.id.main_iv)
         ImageLoader.setProxy(GlideProxy())
-        ImageLoader.loadImage(this,"https://www.baidu.com/img/bd_logo1.png", mIv)
+        ImageLoader.loadImage(this, "https://www.baidu.com/img/bd_logo1.png", mIv)
     }
 }

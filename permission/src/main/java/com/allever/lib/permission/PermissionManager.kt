@@ -36,16 +36,16 @@ object PermissionManager {
 
     fun jumpPermissionSetting(activity: Activity, requestCode: Int, cancelListener: DialogInterface.OnClickListener) {
         val builder = AlertDialog.Builder(activity)
-        builder.setMessage(R.string.permission_need_some_permission)
-        builder.setTitle(R.string.permission_warm_tips)
+        builder.setMessage(R.string.permission_permission_need_some_permission)
+        builder.setTitle(R.string.permission_permission_warm_tips)
         builder.setCancelable(false)
-        builder.setPositiveButton(R.string.permission_go) { dialog, which ->
+        builder.setPositiveButton(R.string.permission_permission_go) { dialog, which ->
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
             val uri = Uri.fromParts("package", activity.packageName, null)
             intent.data = uri
             activity.startActivityForResult(intent, requestCode)
         }
-        builder.setNegativeButton(R.string.permission_cancel, cancelListener)
+        builder.setNegativeButton(R.string.permission_permission_cancel, cancelListener)
         builder.show()
     }
 
