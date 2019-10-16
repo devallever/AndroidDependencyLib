@@ -18,6 +18,8 @@
 package com.allever.lib.common.util
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -56,5 +58,10 @@ object ActivityCollector {
             }
             activityList.clear()
         }
+    }
+
+    fun <T: Activity> startActivity(context: Context, clazz: Class<T>) {
+        val intent = Intent(context, clazz)
+        context.startActivity(intent)
     }
 }
