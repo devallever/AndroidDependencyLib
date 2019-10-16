@@ -6,8 +6,8 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.allever.lib.common.R
 import com.allever.lib.common.util.DLog
-import com.allever.lib.common.util.ToastUtils
 import com.allever.lib.common.util.ActivityCollector
+import com.allever.lib.common.util.toast
 import java.lang.ref.WeakReference
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -21,8 +21,8 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         ActivityCollector.remove(mWeakRefActivity)
+        super.onDestroy()
     }
 
     private var firstPressedBackTime = 0L
