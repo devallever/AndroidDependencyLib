@@ -26,11 +26,12 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     private var firstPressedBackTime = 0L
-    protected fun checkExit() {
+    protected fun checkExit(runnable: Runnable? = null) {
         if (System.currentTimeMillis() - firstPressedBackTime < 2000) {
+            runnable?.run()
             super.onBackPressed()
         } else {
-            ToastUtils.show(getString(R.string.common_click_again_to_exit))
+            toast(getString(R.string.common_click_again_to_exit))
             firstPressedBackTime = System.currentTimeMillis()
         }
     }
