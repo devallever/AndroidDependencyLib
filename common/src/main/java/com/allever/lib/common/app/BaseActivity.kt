@@ -3,6 +3,7 @@ package com.allever.lib.common.app
 import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.allever.lib.common.R
 import com.allever.lib.common.util.DLog
@@ -11,7 +12,7 @@ import com.allever.lib.common.util.toast
 import java.lang.ref.WeakReference
 
 abstract class BaseActivity : AppCompatActivity() {
-    protected val mHandler = Handler()
+    protected val mHandler = Handler(Looper.getMainLooper())
     private var mWeakRefActivity: WeakReference<Activity>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
