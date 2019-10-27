@@ -9,8 +9,16 @@ fun Any.log(msg: String) {
     LogUtils.d(msg)
 }
 
+fun Any.log(tag: String, msg: String) {
+    LogUtils.d(tag, msg)
+}
+
 fun Any.loge(msg: String) {
     LogUtils.e(msg)
+}
+
+fun Any.loge(tag: String, msg: String) {
+    LogUtils.e(tag, msg)
 }
 
 fun Any.toast(msg: String) {
