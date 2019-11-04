@@ -8,16 +8,21 @@ import com.allever.lib.common.R
 object ShareHelper {
 
     fun shareText(obj: Any, msg: String) {
-        when(obj) {
-            is Fragment -> {
-                obj.startActivity(getShareIntent(msg))
+        try {
+            when(obj) {
+                is Fragment -> {
+                    obj.startActivity(getShareIntent(msg))
+                }
+                is android.app.Fragment -> {
+                    obj.startActivity(getShareIntent(msg))
+                }
+                is Activity -> {
+                    obj.startActivity(getShareIntent(msg))
+                }
             }
-            is android.app.Fragment -> {
-                obj.startActivity(getShareIntent(msg))
-            }
-            is Activity -> {
-                obj.startActivity(getShareIntent(msg))
-            }
+        } catch (e: Exception) {
+            toast("没有找到可分享的应用")
+            e.printStackTrace()
         }
     }
 
