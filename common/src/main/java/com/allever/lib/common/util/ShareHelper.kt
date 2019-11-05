@@ -1,6 +1,7 @@
 package com.allever.lib.common.util
 
 import android.app.Activity
+import android.app.Service
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -32,9 +33,15 @@ object ShareHelper {
                 is Activity -> {
                     obj.startActivity(intent)
                 }
+                is Service -> {
+                    obj.startActivity(intent)
+                }
+                else -> {
+                    toast(R.string.common_share_tips_no_intent)
+                }
             }
         } catch (e: Exception) {
-            toast("没有找到可分享的应用")
+            toast(R.string.common_share_tips_no_intent)
             e.printStackTrace()
         }
     }

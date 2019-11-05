@@ -8,5 +8,6 @@
     <string name="common_select_mail_app">请选择邮件类应用</string>
     <string name="common_has_not_google_service">没安装谷歌服务</string>
     <string name="common_share_to">分享到</string>
+    <string name="common_share_tips_no_intent">没有找到可分享的应用</string>
 
 </resources>

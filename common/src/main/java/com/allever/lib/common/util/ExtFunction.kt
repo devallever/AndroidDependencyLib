@@ -27,6 +27,12 @@ fun Any.toast(msg: String) {
     }
 }
 
+fun Any.toast(resId: Int) {
+    App.context.runOnUiThread {
+        toast(getString(resId))
+    }
+}
+
 fun Any.getString(resId: Int): String {
     return App.context.resources.getString(resId)
 }
