@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.allever.lib.common.R
 import com.allever.lib.common.util.DLog
@@ -34,6 +35,14 @@ abstract class BaseActivity : AppCompatActivity() {
         } else {
             toast(getString(R.string.common_click_again_to_exit))
             firstPressedBackTime = System.currentTimeMillis()
+        }
+    }
+
+    protected fun setVisibility(view: View, show: Boolean) {
+        if (show) {
+            view.visibility = View.VISIBLE
+        } else {
+            view.visibility = View.GONE
         }
     }
 }
