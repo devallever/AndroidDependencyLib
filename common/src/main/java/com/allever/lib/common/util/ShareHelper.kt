@@ -5,8 +5,8 @@ import android.app.Service
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import androidx.core.content.FileProvider
-import androidx.fragment.app.Fragment
+import android.support.v4.app.Fragment
+import android.support.v4.content.FileProvider
 import com.allever.lib.common.R
 import com.allever.lib.common.app.App
 import java.io.File

@@ -19,9 +19,11 @@ package com.allever.lib.common.ui.widget.tab;
 import android.content.Context;
 import android.content.res.TypedArray;
 
+import com.allever.lib.common.R;
+
 class ThemeUtils {
 
-    private static final int[] APPCOMPAT_CHECK_ATTRS = { com.google.android.material.R.attr.colorPrimary };
+    private static final int[] APPCOMPAT_CHECK_ATTRS = { R.attr.colorPrimary };
 
     static void checkAppCompatTheme(Context context) {
         TypedArray a = context.obtainStyledAttributes(APPCOMPAT_CHECK_ATTRS);

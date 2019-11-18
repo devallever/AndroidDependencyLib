@@ -64,11 +64,4 @@ object ActivityCollector {
         val intent = Intent(context, clazz)
         context.startActivity(intent)
     }
-
-    fun getTopActivity(): Activity? {
-        if (activityList.isNotEmpty()) {
-            return activityList[activityList.size -1]?.get()
-        }
-        return null
-    }
 }

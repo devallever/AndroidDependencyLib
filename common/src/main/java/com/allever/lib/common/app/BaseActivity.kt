@@ -4,8 +4,8 @@ import android.app.Activity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.support.v7.app.AppCompatActivity
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.allever.lib.common.R
 import com.allever.lib.common.util.DLog
 import com.allever.lib.common.util.ActivityCollector

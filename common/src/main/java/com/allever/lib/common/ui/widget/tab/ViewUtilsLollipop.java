@@ -17,10 +17,10 @@
 package com.allever.lib.common.ui.widget.tab;
 
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 
-import androidx.annotation.RequiresApi;
 
 class ViewUtilsLollipop {
 

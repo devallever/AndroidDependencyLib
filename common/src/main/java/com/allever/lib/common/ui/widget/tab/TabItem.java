@@ -18,10 +18,11 @@ package com.allever.lib.common.ui.widget.tab;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.TintTypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 
-import androidx.appcompat.widget.TintTypedArray;
+import com.allever.lib.common.R;
 
 /**
  * TabItem is a special 'view' which allows you to declare tab items for a {@link TabLayout}
@@ -29,9 +30,9 @@ import androidx.appcompat.widget.TintTypedArray;
  * setting of a tab items's text, icon and custom layout. See TabLayout for more information on how
  * to use it.
  *
- * @attr ref com.google.android.material.R.styleable#TabItem_android_icon
- * @attr ref com.google.android.material.R.styleable#TabItem_android_text
- * @attr ref com.google.android.material.R.styleable#TabItem_android_layout
+ * @attr ref R.styleable#TabItem_android_icon
+ * @attr ref R.styleable#TabItem_android_text
+ * @attr ref R.styleable#TabItem_android_layout
  *
  * @see TabLayout
  */
@@ -48,10 +49,10 @@ public final class TabItem extends View {
         super(context, attrs);
 
         final TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs,
-                com.google.android.material.R.styleable.TabItem);
-        mText = a.getText(com.google.android.material.R.styleable.TabItem_android_text);
-        mIcon = a.getDrawable(com.google.android.material.R.styleable.TabItem_android_icon);
-        mCustomLayout = a.getResourceId(com.google.android.material.R.styleable.TabItem_android_layout, 0);
+                R.styleable.TabItem);
+        mText = a.getText(R.styleable.TabItem_android_text);
+        mIcon = a.getDrawable(R.styleable.TabItem_android_icon);
+        mCustomLayout = a.getResourceId(R.styleable.TabItem_android_layout, 0);
         a.recycle();
     }
 }

@@ -1,6 +1,6 @@
 package com.allever.lib.httpsglide.okhttp3;
 
-import androidx.annotation.NonNull;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.DataSource;

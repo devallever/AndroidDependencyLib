@@ -1,1 +1,4 @@
-include ':app', ':common', ':permission', ':imageloader', ':glideloader', ':httpsglide',':umeng'
+include ':app', ':common', ':permission', ':httpsglide'
+
+include ':imageloader'
+project(':imageloader').projectDir = new File(settingsDir, '../AndroidDependencyLib/imageloader')

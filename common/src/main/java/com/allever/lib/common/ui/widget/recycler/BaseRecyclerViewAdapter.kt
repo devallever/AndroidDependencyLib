@@ -1,8 +1,8 @@
 package com.allever.lib.common.ui.widget.recycler
 
 import android.content.Context
-import androidx.annotation.IntRange
-import androidx.annotation.LayoutRes
+import android.support.annotation.LayoutRes
+import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 
 import java.util.ArrayList
@@ -13,7 +13,7 @@ import java.util.ArrayList
  * https://blog.csdn.net/qq_35605213/article/details/80176558
  * @param <T>
 </T> */
-abstract class BaseRecyclerViewAdapter<T> : androidx.recyclerview.widget.RecyclerView.Adapter<BaseViewHolder> {
+abstract class BaseRecyclerViewAdapter<T> : RecyclerView.Adapter<BaseViewHolder> {
     protected var mContext: Context
     protected var mLayoutResId: Int = 0
     var mItemListener: ItemListener? = null
@@ -61,7 +61,7 @@ abstract class BaseRecyclerViewAdapter<T> : androidx.recyclerview.widget.Recycle
         notifyItemChanged(position, position)
     }
 
-    fun addData(@IntRange(from = 0) position: Int, data: T) {
+    fun addData(position: Int, data: T) {
         mData.add(position, data)
         notifyItemInserted(position)
         compatibilityDataSizeChanged(1)

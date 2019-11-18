@@ -1,8 +1,8 @@
 package com.allever.android.dependency.lib
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 import com.allever.android.dependency.lib.glide.GlideProxy
 import com.allever.lib.imageloader.ImageLoader
 

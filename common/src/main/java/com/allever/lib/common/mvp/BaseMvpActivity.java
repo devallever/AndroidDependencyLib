@@ -1,7 +1,8 @@
 package com.allever.lib.common.mvp;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
+import android.support.annotation.Nullable;
+//import android.support.annotation.Nullable;
 import com.allever.lib.common.app.BaseActivity;
 
 

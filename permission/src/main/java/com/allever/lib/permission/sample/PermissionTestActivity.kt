@@ -2,8 +2,7 @@ package com.allever.lib.permission.sample
 
 import android.Manifest
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.allever.lib.common.app.App
+import android.support.v7.app.AppCompatActivity
 import com.allever.lib.common.util.DLog
 import com.allever.lib.common.util.ToastUtils
 import com.allever.lib.permission.PermissionListener
