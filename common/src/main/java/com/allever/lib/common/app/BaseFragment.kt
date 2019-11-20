@@ -3,12 +3,12 @@ package com.allever.lib.common.app
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.support.v4.app.Fragment
 import android.view.KeyEvent
 import android.view.View
+import com.allever.android.app.MyFragment
 import com.allever.lib.common.util.DLog
 
-open class BaseFragment : Fragment() {
+open class BaseFragment : MyFragment() {
     protected val mHandler = Handler(Looper.getMainLooper())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
