@@ -38,7 +38,9 @@ class RecommendActivity: BaseActivity(), View.OnClickListener {
             }
         })
 
-        getRecommendData()
+        if (RecommendGlobal.recommendData.isEmpty()) {
+            getRecommendData()
+        }
     }
 
     override fun onClick(v: View?) {
@@ -63,7 +65,7 @@ class RecommendActivity: BaseActivity(), View.OnClickListener {
                 override fun onError(e: Throwable?) {
                     loge(e?.printStackTrace().toString())
                     log("获取推荐数据失败")
-                    toast("获取推荐数据失败")
+                    toast("暂时没有推荐数据")
                 }
             })
         } else {
@@ -79,7 +81,7 @@ class RecommendActivity: BaseActivity(), View.OnClickListener {
                 override fun onError(e: Throwable?) {
                     loge(e?.printStackTrace().toString())
                     log("获取推荐数据失败")
-                    toast("获取推荐数据失败")
+                    toast("暂时没有推荐数据")
                 }
             })
         }
