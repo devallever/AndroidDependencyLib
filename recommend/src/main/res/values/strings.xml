@@ -1,0 +1,6 @@
+<resources>
+    <string name="recommend_app_name">recommend</string>
+
+    <string name="recommend">App Recommendation</string>
+    <string name="recommend_size">Size</string>
+</resources>
