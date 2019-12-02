@@ -1,5 +1,8 @@
 package com.allever.lib.recommend
 
+import androidx.annotation.Keep
+
+@Keep
 class Recommend {
     var id: Int = 0
     var type: Int = 0

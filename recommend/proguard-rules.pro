@@ -19,3 +19,37 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+# okhttp-----------------------------------------------------------------------------------------
+-dontwarn okhttp3.**
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-keepnames class okhttp3.internal.publicsuffix.PublicSuffixDatabase
+# okhttp-----------------------------------------------------------------------------------------
+
+# Retrofit-----------------------------------------------------------------------------------------
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-dontnote retrofit2.Platform
+-dontwarn retrofit2.Platform$Java8
+-keepattributes Signature
+-keepattributes Exceptions
+# Retrofit-----------------------------------------------------------------------------------------
+
+# RxJava RxAndroid----------------------------------------------------------------------------------
+-keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
+    long producerIndex;
+    long consumerIndex;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueProducerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode producerNode;
+}
+-keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
+    rx.internal.util.atomic.LinkedQueueNode consumerNode;
+}
+# RxJava RxAndroid----------------------------------------------------------------------------------
+
+# Gson-----------------------------------------------------------------------------------------
+# Gson--------------------------------------------------------------------------
+
