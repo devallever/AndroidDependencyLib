@@ -12,5 +12,7 @@ class Recommend {
     var size: String = ""
     var pkg: String = ""
     var url: String = ""
+    var tag: String = ""
+    var version: String = ""
     var iconUrl: String = ""
 }

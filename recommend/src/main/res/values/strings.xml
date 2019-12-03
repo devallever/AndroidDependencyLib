@@ -3,4 +3,5 @@
 
     <string name="recommend">App Recommendation</string>
     <string name="recommend_size">Size</string>
+    <string name="recommend_version">Ver</string>
 </resources>

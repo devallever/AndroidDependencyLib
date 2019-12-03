@@ -52,38 +52,25 @@ class RecommendActivity: BaseActivity(), View.OnClickListener {
     }
 
     private fun getRecommendData() {
+        val subscriber = object : Subscriber<RecommendBean>(){
+            override fun onNext(data: RecommendBean?) {
+                handleRecommendData(data)
+            }
+
+            override fun onCompleted() {
+                log("获取推荐数据成功")
+            }
+
+            override fun onError(e: Throwable?) {
+                loge(e?.printStackTrace().toString())
+                log("获取推荐数据失败")
+                toast("暂时没有推荐数据")
+            }
+        }
         if (SystemUtils.isChineseLang()) {
-            RetrofitUtil.getRecommendZh(object : Subscriber<RecommendBean>(){
-                override fun onNext(data: RecommendBean?) {
-                    handleRecommendData(data)
-                }
-
-                override fun onCompleted() {
-                    log("获取推荐数据成功")
-                }
-
-                override fun onError(e: Throwable?) {
-                    loge(e?.printStackTrace().toString())
-                    log("获取推荐数据失败")
-                    toast("暂时没有推荐数据")
-                }
-            })
+            RetrofitUtil.getRecommendZh(subscriber)
         } else {
-            RetrofitUtil.getRecommendEn(object : Subscriber<RecommendBean>(){
-                override fun onNext(data: RecommendBean?) {
-                    handleRecommendData(data)
-                }
-
-                override fun onCompleted() {
-                    log("获取推荐数据成功")
-                }
-
-                override fun onError(e: Throwable?) {
-                    loge(e?.printStackTrace().toString())
-                    log("获取推荐数据失败")
-                    toast("暂时没有推荐数据")
-                }
-            })
+            RetrofitUtil.getRecommendEn(subscriber)
         }
 
     }
