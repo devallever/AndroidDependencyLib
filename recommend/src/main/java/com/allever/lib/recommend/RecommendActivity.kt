@@ -54,7 +54,7 @@ class RecommendActivity: BaseActivity(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        setResult(Activity.RESULT_OK)
+//        setResult(Activity.RESULT_OK)
     }
 
     private fun getRecommendData() {
