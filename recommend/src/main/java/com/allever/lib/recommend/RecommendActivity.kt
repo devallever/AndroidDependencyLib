@@ -1,5 +1,6 @@
 package com.allever.lib.recommend
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -49,6 +50,11 @@ class RecommendActivity: BaseActivity(), View.OnClickListener {
                 finish()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        setResult(Activity.RESULT_OK)
     }
 
     private fun getRecommendData() {
