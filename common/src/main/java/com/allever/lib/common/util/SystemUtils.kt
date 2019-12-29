@@ -2,11 +2,15 @@ package com.allever.lib.common.util
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Toast
+import com.allever.lib.common.BuildConfig
 import com.allever.lib.common.app.App
 import java.util.*
 
@@ -44,5 +48,34 @@ object SystemUtils {
             val lang = langList[0]
             return lang.language == "zh"
         }
+    }
+
+    fun startWebView(context: Context, uri: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+        } else {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+        }
+        try {
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(context, "Sorry, Your mobile can't be supported", Toast.LENGTH_LONG)
+                .show()
+        }
+
+    }
+
+    fun getManifestDataByKey(context: Context, key: String): String {
+        val appInfo = App.context.packageManager
+            .getApplicationInfo(
+                context.packageName,
+                PackageManager.GET_META_DATA
+            )
+        val msg = appInfo.metaData.getString(key)
+        log("$key - $msg")
+        return msg?:""
     }
 }
