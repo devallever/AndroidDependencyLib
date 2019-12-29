@@ -1,6 +1,8 @@
 package com.allever.lib.umeng
 
 import android.content.Context
+import com.allever.lib.common.app.App
+import com.allever.lib.common.util.SystemUtils
 import com.umeng.analytics.MobclickAgent
 import com.umeng.commonsdk.UMConfigure
 
@@ -26,5 +28,9 @@ object UMeng {
         } else {
             MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.MANUAL)
         }
+    }
+
+    fun getChannel(): String {
+        return SystemUtils.getManifestDataByKey(App.context, "UMENG_CHANNEL")
     }
 }
