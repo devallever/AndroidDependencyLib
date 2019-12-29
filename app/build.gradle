@@ -32,4 +32,5 @@ dependencies {
     implementation project(path: ':imageloader')
 //    implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation project(path: ':httpsglide')
+    implementation project(path: ':recommend')
 }
