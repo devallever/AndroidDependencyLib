@@ -1,7 +1,7 @@
 package com.allever.lib.httpsglide.okhttp3;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
@@ -10,6 +10,8 @@ import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.module.LibraryGlideModule;
 
 import java.io.InputStream;
+
+import androidx.annotation.NonNull;
 
 /**
  * Registers OkHttp related classes via Glide's annotation processor.
