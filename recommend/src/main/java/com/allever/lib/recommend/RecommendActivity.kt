@@ -63,6 +63,10 @@ class RecommendActivity : BaseActivity(), View.OnClickListener {
 
 //        if (BuildConfig.DEBUG) {
 //            getLocalRecommendData()
+//        } else {
+//            if (RecommendGlobal.recommendData.isEmpty()) {
+//                getRecommendData()
+//            }
 //        }
     }
 
@@ -127,7 +131,12 @@ class RecommendActivity : BaseActivity(), View.OnClickListener {
                     handleChannelRecommendData(data, "xiaomi")
                 }
                 else -> {
-                    mRecommendData.addAll(data.data!!)
+                    data.data?.map {
+                        if (it.url.isNotEmpty()) {
+                            mRecommendData.add(it)
+                        }
+                    }
+//                    mRecommendData.addAll(data.data!!)
                 }
             }
             mAdapter?.notifyDataSetChanged()
