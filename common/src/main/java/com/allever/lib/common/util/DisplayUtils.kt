@@ -1,5 +1,7 @@
 package com.allever.lib.common.util
 
+import android.content.Context
+import android.util.DisplayMetrics
 import com.allever.lib.common.app.App
 
 /**
@@ -45,5 +47,13 @@ object DisplayUtils {
     fun sp2px(sp: Int): Int {
         val scaledDensity = App.context.resources.displayMetrics.scaledDensity
         return (sp * scaledDensity + 0.5f).toInt()
+    }
+
+    fun getDeviceDensity(): Float {
+        return App.context.resources.displayMetrics.density
+    }
+
+    fun getDisplayMetrics(): DisplayMetrics {
+        return App.context.resources.displayMetrics
     }
 }

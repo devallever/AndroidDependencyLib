@@ -33,7 +33,7 @@ object FileUtils {
     fun readTextFile(path: String?): String {
         var result = ""
 
-        if (checkExist(path)) return result
+        if (!checkExist(path)) return result
 
         try {
             result = readTextFileFromInputStream(FileInputStream(path))
