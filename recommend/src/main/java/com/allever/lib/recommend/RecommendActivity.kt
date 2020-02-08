@@ -4,18 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
-import android.text.TextUtils
 import android.view.View
 import android.widget.TextView
 import com.allever.android.recyclerview.widget.MyLinearLayoutManager
 import com.allever.android.recyclerview.widget.MyRecyclerView
-import com.allever.lib.common.app.App
 import com.allever.lib.common.app.BaseActivity
 import com.allever.lib.common.ui.widget.recycler.BaseViewHolder
 import com.allever.lib.common.ui.widget.recycler.ItemListener
 import com.allever.lib.common.util.*
 import com.google.gson.Gson
-import rx.Subscriber
 import java.io.File
 
 class RecommendActivity : BaseActivity(), View.OnClickListener {
@@ -55,17 +52,8 @@ class RecommendActivity : BaseActivity(), View.OnClickListener {
         mAdapter?.setItemListener(object : ItemListener {
             override fun onItemClick(position: Int, holder: BaseViewHolder) {
                 //如果安装了谷歌商店，则打开google商店
-                val url = when (mUmengChannel) {
-                    "google" -> {
-                        mRecommendData[position].googleUrl
-                    }
-                    "xiaomi" -> {
-                        mRecommendData[position].xiaomiUrl
-                    }
-                    else -> {
-                        mRecommendData[position].url
-                    }
-                }
+                val item = mRecommendData[position]
+                val url = RecommendGlobal.getItemUrl(item)
                 SystemUtils.openUrl(this@RecommendActivity, url)
             }
         })

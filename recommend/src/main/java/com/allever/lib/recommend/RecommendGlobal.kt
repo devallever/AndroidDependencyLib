@@ -19,10 +19,13 @@ object RecommendGlobal {
 
     private val FILE_PATH = DIR + File.separator + FILE_NAME
 
+    var channel = ""
+
     fun init(channel: String) {
         log("cache dir = $DIR")
         FileUtil.createDir(DIR)
         getRecommendData(channel, null)
+        this.channel = channel
     }
 
     fun getRecommendData(channel: String, listener: RecommendListener?) {
@@ -83,6 +86,21 @@ object RecommendGlobal {
             listener?.onSuccess(recommendData)
         } else {
             listener?.onFail()
+        }
+    }
+
+    fun getItemUrl(item: Recommend): String {
+
+        return when (channel) {
+            "google" -> {
+                item.googleUrl
+            }
+            "xiaomi" -> {
+                item.xiaomiUrl
+            }
+            else -> {
+                item.url
+            }
         }
     }
 
