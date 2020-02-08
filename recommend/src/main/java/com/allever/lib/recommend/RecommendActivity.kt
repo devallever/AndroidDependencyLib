@@ -25,6 +25,19 @@ class RecommendActivity : BaseActivity(), View.OnClickListener {
     private var mAdapter: RecommendAdapter? = null
     private var mUmengChannel = ""
 
+    private var mRecommendListener = object : RecommendListener {
+        override fun onSuccess(data: MutableList<Recommend>) {
+            mRecommendData.clear()
+            mRecommendData.addAll(data)
+            mAdapter?.notifyDataSetChanged()
+        }
+
+        override fun onFail() {
+            toast("No Recommend")
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recommend)
@@ -58,7 +71,7 @@ class RecommendActivity : BaseActivity(), View.OnClickListener {
         })
 
         if (RecommendGlobal.recommendData.isEmpty()) {
-            getRecommendData()
+            RecommendGlobal.getRecommendData(mUmengChannel, mRecommendListener)
         }
 
 //        if (BuildConfig.DEBUG) {
@@ -78,91 +91,15 @@ class RecommendActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-//        setResult(Activity.RESULT_OK)
-    }
-
     private fun getLocalRecommendData() {
         val path = Environment.getExternalStorageDirectory().absolutePath + File.separator + "recommend.json"
         val recommendData = FileUtils.readTextFile(path)
         try {
             val gson = Gson()
             val recommend = gson.fromJson(recommendData, RecommendBean::class.java)
-            handleRecommendData(recommend)
+            RecommendGlobal.handleRecommendData(recommend, mUmengChannel, mRecommendListener)
         } catch (e: Exception) {
             e.printStackTrace()
-        }
-    }
-
-    private fun getRecommendData() {
-        val subscriber = object : Subscriber<RecommendBean>() {
-            override fun onNext(data: RecommendBean?) {
-                handleRecommendData(data)
-            }
-
-            override fun onCompleted() {
-                log("获取推荐数据成功")
-            }
-
-            override fun onError(e: Throwable?) {
-                loge(e?.message?:"")
-                log("获取推荐数据失败")
-                toast("No Recommend")
-            }
-        }
-        if (SystemUtils.isChineseLang()) {
-            RetrofitUtil.getRecommendZh(subscriber)
-        } else {
-            RetrofitUtil.getRecommendEn(subscriber)
-        }
-
-    }
-
-    private fun handleRecommendData(data: RecommendBean?) {
-        if (data?.data?.isNotEmpty() == true) {
-            mRecommendData.clear()
-
-            when(mUmengChannel) {
-                "google" -> {
-                    handleChannelRecommendData(data, "google")
-                }
-                "xiaomi" -> {
-                    handleChannelRecommendData(data, "xiaomi")
-                }
-                else -> {
-                    data.data?.map {
-                        if (it.url.isNotEmpty()) {
-                            mRecommendData.add(it)
-                        }
-                    }
-//                    mRecommendData.addAll(data.data!!)
-                }
-            }
-            mAdapter?.notifyDataSetChanged()
-
-            RecommendGlobal.recommendData.clear()
-            RecommendGlobal.recommendData.addAll(mRecommendData)
-        }
-    }
-
-    private fun handleChannelRecommendData(data: RecommendBean?, channel: String) {
-        data?.data?.map {
-            val channelValue = it.channel
-            if (!TextUtils.isEmpty(channelValue)) {
-                if (channelValue.contains("|")) {
-                    // | 分割的多个渠道
-                    val channelList = channelValue.split("|")
-                    if (channelList.contains(channel)) {
-                        mRecommendData.add(it)
-                    }
-                } else {
-                    //单个渠道值
-                    if (channelValue == channel) {
-                        mRecommendData.add(it)
-                    }
-                }
-            }
         }
     }
 

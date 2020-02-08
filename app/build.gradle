@@ -34,4 +34,6 @@ dependencies {
     implementation project(path: ':httpsglide')
     implementation project(path: ':recommend')
     implementation project(path: ':comment')
+
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }
