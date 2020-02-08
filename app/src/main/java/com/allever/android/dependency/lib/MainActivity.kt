@@ -15,6 +15,8 @@ import com.allever.lib.comment.CommentListener
 import com.allever.lib.common.app.BaseActivity
 import com.allever.lib.common.util.DisplayUtils
 import com.allever.lib.recommend.RecommendActivity
+import com.allever.lib.recommend.RecommendDialog
+import com.allever.lib.recommend.RecommendDialogListener
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerFrameLayout
 import kotlinx.android.synthetic.main.activity_main.*
@@ -104,7 +106,27 @@ class MainActivity : BaseActivity() {
         if (mCommentDialog?.isShowing == true) {
             super.onBackPressed()
         } else {
-            CommentHelper.show(this, mCommentDialog)
+//            CommentHelper.show(this, mCommentDialog)
+
+            RecommendDialog.create(this, object : RecommendDialogListener {
+                override fun onMore(dialog: AlertDialog?) {
+                    dialog?.dismiss()
+                }
+
+                override fun onReject(dialog: AlertDialog?) {
+                    dialog?.dismiss()
+                }
+
+                override fun onBackPress(dialog: AlertDialog?) {
+                    mCommentDialog?.dismiss()
+                    GlobalScope.launch {
+                        delay(200)
+                        finish()
+                    }
+                }
+            })
+
+
         }
     }
 
