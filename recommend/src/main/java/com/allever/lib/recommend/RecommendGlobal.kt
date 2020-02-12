@@ -89,6 +89,18 @@ object RecommendGlobal {
         }
     }
 
+    fun getUrl(pkg: String): String {
+        var url = ""
+        recommendData.map {
+            if (pkg == it.pkg) {
+                url = getItemUrl(it)
+                return@map
+            }
+        }
+
+        return url
+    }
+
     fun getItemUrl(item: Recommend): String {
 
         return when (channel) {
