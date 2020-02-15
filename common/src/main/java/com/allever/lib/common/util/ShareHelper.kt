@@ -21,6 +21,10 @@ object ShareHelper {
         share(obj, getShareAudioIntent(path))
     }
 
+    fun shareImage(obj: Any, path: String) {
+        share(obj, getShareImageIntent(path))
+    }
+
     private fun share(obj: Any, intent: Intent) {
         try {
             when (obj) {
@@ -55,6 +59,23 @@ object ShareHelper {
             shareIntent,
             getString(R.string.common_share_to)
         )
+    }
+
+    private fun getShareImageIntent(path: String): Intent {
+        val file = File(path)
+        val fileUri: Uri
+        fileUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //解决调用相册不显示图片的问题
+            FileProvider.getUriForFile(App.context, "${App.context.packageName}.fileprovider", file)
+        } else {
+            Uri.fromFile(file)
+        }
+
+        val shareIntent = Intent()
+        shareIntent.action = Intent.ACTION_SEND
+        shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
+        shareIntent.type = "image/*"
+        return shareIntent
     }
 
     private fun getShareAudioIntent(path: String): Intent {
