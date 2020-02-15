@@ -2,22 +2,16 @@ package com.allever.android.dependency.lib
 
 import android.animation.*
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
-import android.view.KeyEvent
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.appcompat.app.AlertDialog
 import com.allever.lib.comment.CommentDialog
 import com.allever.lib.comment.CommentHelper
 import com.allever.lib.comment.CommentListener
 import com.allever.lib.common.app.BaseActivity
-import com.allever.lib.common.util.DisplayUtils
 import com.allever.lib.recommend.RecommendActivity
-import com.allever.lib.recommend.RecommendDialog
+import com.allever.lib.recommend.RecommendDialogHelper
 import com.allever.lib.recommend.RecommendDialogListener
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -108,27 +102,26 @@ class MainActivity : BaseActivity() {
         if (mCommentDialog?.isShowing == true) {
             super.onBackPressed()
         } else {
-            mCommentDialog?.show()
+//            mCommentDialog?.show()
 
-//            RecommendDialog.create(this, object : RecommendDialogListener {
-//                override fun onMore(dialog: AlertDialog?) {
-//                    dialog?.dismiss()
-//                }
-//
-//                override fun onReject(dialog: AlertDialog?) {
-//                    dialog?.dismiss()
-//                }
-//
-//                override fun onBackPress(dialog: AlertDialog?) {
-//                    mCommentDialog?.dismiss()
-//                    GlobalScope.launch {
-//                        delay(200)
-//                        finish()
-//                    }
-//                }
-//            })
+            val recommendDialog = RecommendDialogHelper.createRecommendDialog(this, object : RecommendDialogListener {
+                override fun onMore(dialog: Dialog?) {
+                    dialog?.dismiss()
+                }
 
+                override fun onReject(dialog: Dialog?) {
+                    dialog?.dismiss()
+                }
 
+                override fun onBackPress(dialog: Dialog?) {
+                    mCommentDialog?.dismiss()
+                    GlobalScope.launch {
+                        delay(200)
+                        finish()
+                    }
+                }
+            })
+            RecommendDialogHelper.show(this, recommendDialog)
         }
     }
 

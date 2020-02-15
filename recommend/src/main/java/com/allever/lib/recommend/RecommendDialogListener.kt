@@ -1,12 +1,13 @@
 package com.allever.lib.recommend
 
+import android.app.Dialog
 import androidx.appcompat.app.AlertDialog
 
 interface RecommendDialogListener {
 
-    fun onMore(dialog: AlertDialog?)
+    fun onMore(dialog: Dialog?)
 
-    fun onReject(dialog: AlertDialog?)
+    fun onReject(dialog: Dialog?)
 
-    fun onBackPress(dialog: AlertDialog?)
+    fun onBackPress(dialog: Dialog?)
 }

@@ -2,52 +2,50 @@ package com.allever.lib.recommend
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
-import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import com.allever.lib.common.app.App
 import com.allever.lib.common.util.DisplayUtils
 import com.allever.lib.common.util.SystemUtils
-import com.allever.lib.common.util.Tool
 import com.allever.lib.common.util.log
+import com.allever.lib.recommend.RecommendGlobal.getItemUrl
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.runOnUiThread
 
-class RecommendDialog(var context: Activity) : Dialog(context, R.style.CommonCustomDialogStyle) {
+object RecommendDialogHelper {
 
-    private var mListener: RecommendDialogListener? = null
+    private var mAlertDialog: AlertDialog? = null
 
     private var mList = mutableListOf<Recommend>()
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.dialog_recommend)
-        //初始化界面控件
-        initView()
+    fun createRecommendDialog(activity: Activity?, listener: RecommendDialogListener?): Dialog? {
+        activity?: return null
+        val dialog = RecommendDialog(activity)
+        dialog.setListener(listener)
+        return dialog
     }
 
-    /**
-     * 初始化界面控件
-     */
-    private fun initView() {
+    fun create(activity: Activity?, listener: RecommendDialogListener?) {
+        activity ?: return
+
         mList.clear()
 
-        val tvMore = findViewById<View>(R.id.tvMore)
-        val tvRefuse = findViewById<View>(R.id.tvRefuse)
+        val view = LayoutInflater.from(activity).inflate(R.layout.dialog_recommend, null)
+//        val llStar = view.findViewById<LinearLayout>(R.id.llStar)
+        val tvMore = view.findViewById<View>(R.id.tvMore)
+        val tvRefuse = view.findViewById<View>(R.id.tvRefuse)
 
 
-        val ivA = findViewById<ImageView>(R.id.ivRecommendA)
-        val ivB = findViewById<ImageView>(R.id.ivRecommendB)
-        val ivC = findViewById<ImageView>(R.id.ivRecommendC)
+        val ivA = view.findViewById<ImageView>(R.id.ivRecommendA)
+        val ivB = view.findViewById<ImageView>(R.id.ivRecommendB)
+        val ivC = view.findViewById<ImageView>(R.id.ivRecommendC)
 
         val mRandom = java.util.Random()
         val total = RecommendGlobal.recommendData.size
@@ -67,9 +65,9 @@ class RecommendDialog(var context: Activity) : Dialog(context, R.style.CommonCus
             ivB.visibility = View.VISIBLE
             ivC.visibility = View.VISIBLE
 
-            Glide.with(context).load(mList[0].iconUrl).into(ivA)
-            Glide.with(context).load(mList[1].iconUrl).into(ivB)
-            Glide.with(context).load(mList[2].iconUrl).into(ivC)
+            Glide.with(activity).load(mList[0].iconUrl).into(ivA)
+            Glide.with(activity).load(mList[1].iconUrl).into(ivB)
+            Glide.with(activity).load(mList[2].iconUrl).into(ivC)
         } else {
             for (i in 0 until total) {
                 log("select $i")
@@ -82,14 +80,14 @@ class RecommendDialog(var context: Activity) : Dialog(context, R.style.CommonCus
                     ivC.visibility = View.GONE
                 }
                 1 -> {
-                    Glide.with(context).load(mList[0].iconUrl).into(ivA)
+                    Glide.with(activity).load(mList[0].iconUrl).into(ivA)
                     ivA.visibility = View.VISIBLE
                     ivB.visibility = View.GONE
                     ivC.visibility = View.GONE
                 }
                 2 -> {
-                    Glide.with(context).load(mList[0].iconUrl).into(ivA)
-                    Glide.with(context).load(mList[1].iconUrl).into(ivB)
+                    Glide.with(activity).load(mList[0].iconUrl).into(ivA)
+                    Glide.with(activity).load(mList[1].iconUrl).into(ivB)
                     ivA.visibility = View.VISIBLE
                     ivB.visibility = View.VISIBLE
                     ivC.visibility = View.GONE
@@ -100,55 +98,65 @@ class RecommendDialog(var context: Activity) : Dialog(context, R.style.CommonCus
 
         ivA.setOnClickListener {
             //如果安装了谷歌商店，则打开google商店
-            handleIvClick(context, 0)
+            handleIvClick(activity, 0)
         }
 
         ivB.setOnClickListener {
-            handleIvClick(context, 1)
+            handleIvClick(activity, 1)
         }
 
         ivC.setOnClickListener {
-            handleIvClick(context, 2)
+            handleIvClick(activity, 2)
         }
 
         tvMore.setOnClickListener {
-            RecommendActivity.start(context, RecommendGlobal.channel)
-            mListener?.onMore(this)
+            RecommendActivity.start(activity, RecommendGlobal.channel)
+            listener?.onMore(mAlertDialog)
         }
 
         tvRefuse.setOnClickListener {
-            mListener?.onReject(this)
-        }
-    }
-
-    fun setListener(listener: RecommendDialogListener?) {
-        mListener = listener
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            mListener?.onBackPress(this)
-            return true
+            listener?.onReject(mAlertDialog)
         }
 
-        return false
+        mAlertDialog = AlertDialog.Builder(activity)
+            .setView(view)
+            .create()
+
+        mAlertDialog?.setOnKeyListener { dialog, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                listener?.onBackPress(mAlertDialog)
+                return@setOnKeyListener true
+            }
+
+            false
+        }
+
+        mAlertDialog?.window?.setLayout(
+            DisplayUtils.dip2px(280),
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        show(activity, mAlertDialog)
     }
 
-    override fun show() {
-        super.show()
-        window?.setLayout(DisplayUtils.dip2px(320), ViewGroup.LayoutParams.WRAP_CONTENT)
+    fun show(activity: Activity?, dialog: Dialog?) {
+        if (activity?.isFinishing == false) {
+            dialog?.show()
+            dialog?.window?.setLayout(DisplayUtils.dip2px(280), ViewGroup.LayoutParams.WRAP_CONTENT)
+        }
     }
 
     private fun handleIvClick(activity: Activity, index: Int) {
         val item = mList[index]
-        val url = RecommendGlobal.getItemUrl(item)
+        val url = getItemUrl(item)
         GlobalScope.launch {
             SystemUtils.openUrl(activity, url)
             delay(1000)
             App.context.runOnUiThread {
-                dismiss()
+                mAlertDialog?.dismiss()
             }
         }
     }
+
+
 }
