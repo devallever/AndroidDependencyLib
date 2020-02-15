@@ -1,6 +1,7 @@
 package com.allever.android.dependency.lib
 
 import android.animation.*
+import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
+import com.allever.lib.comment.CommentDialog
 import com.allever.lib.comment.CommentHelper
 import com.allever.lib.comment.CommentListener
 import com.allever.lib.common.app.BaseActivity
@@ -63,23 +65,23 @@ class MainActivity : BaseActivity() {
         shimmerLayout.setShimmer(shimmer.build())
         shimmerLayout.startShimmer()
 
-        mCommentDialog = CommentHelper.create(this, object : CommentListener {
-            override fun onComment(dialog: AlertDialog?) {
+        mCommentDialog = CommentHelper.createCommentDialog(this, object : CommentListener {
+            override fun onComment(dialog: Dialog?) {
                 dialog?.dismiss()
             }
 
-            override fun onReject(dialog: AlertDialog?) {
+            override fun onReject(dialog: Dialog?) {
                 dialog?.dismiss()
             }
 
-            override fun onBackPress(dialog: AlertDialog?) {
+            override fun onBackPress(dialog: Dialog?) {
                 mCommentDialog?.dismiss()
                 GlobalScope.launch {
                     delay(200)
                     finish()
                 }
             }
-        })
+        }) as CommentDialog
 
 
         mImageAda = findViewById(R.id.iv1)
@@ -101,30 +103,30 @@ class MainActivity : BaseActivity() {
 
     }
 
-    private var mCommentDialog: AlertDialog? = null
+    private var mCommentDialog: Dialog? = null
     override fun onBackPressed() {
         if (mCommentDialog?.isShowing == true) {
             super.onBackPressed()
         } else {
-//            CommentHelper.show(this, mCommentDialog)
+            mCommentDialog?.show()
 
-            RecommendDialog.create(this, object : RecommendDialogListener {
-                override fun onMore(dialog: AlertDialog?) {
-                    dialog?.dismiss()
-                }
-
-                override fun onReject(dialog: AlertDialog?) {
-                    dialog?.dismiss()
-                }
-
-                override fun onBackPress(dialog: AlertDialog?) {
-                    mCommentDialog?.dismiss()
-                    GlobalScope.launch {
-                        delay(200)
-                        finish()
-                    }
-                }
-            })
+//            RecommendDialog.create(this, object : RecommendDialogListener {
+//                override fun onMore(dialog: AlertDialog?) {
+//                    dialog?.dismiss()
+//                }
+//
+//                override fun onReject(dialog: AlertDialog?) {
+//                    dialog?.dismiss()
+//                }
+//
+//                override fun onBackPress(dialog: AlertDialog?) {
+//                    mCommentDialog?.dismiss()
+//                    GlobalScope.launch {
+//                        delay(200)
+//                        finish()
+//                    }
+//                }
+//            })
 
 
         }

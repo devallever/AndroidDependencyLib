@@ -1,6 +1,7 @@
 package com.allever.lib.comment
 
 import android.app.Activity
+import android.app.Dialog
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,13 @@ import kotlinx.coroutines.launch
 object CommentHelper {
 
     private var mAlertDialog: AlertDialog? = null
+    
+    fun createCommentDialog(activity: Activity?, listener: CommentListener?): Dialog? {
+        activity?:return null
+        val dialog = CommentDialog(activity)
+        dialog.setListener(listener)
+        return dialog
+    }
 
     fun create(activity: Activity?, listener: CommentListener?): AlertDialog? {
         activity ?: return null
@@ -71,7 +79,7 @@ object CommentHelper {
         return mAlertDialog
     }
 
-    fun show(activity: Activity?, dialog: AlertDialog?) {
+    fun show(activity: Activity?, dialog: Dialog?) {
         if (activity?.isFinishing == false) {
             dialog?.show()
             dialog?.window?.setLayout(DisplayUtils.dip2px(320), ViewGroup.LayoutParams.WRAP_CONTENT)

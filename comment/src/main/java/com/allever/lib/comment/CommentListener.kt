@@ -1,12 +1,13 @@
 package com.allever.lib.comment
 
+import android.app.Dialog
 import androidx.appcompat.app.AlertDialog
 
 interface CommentListener {
 
-    fun onComment(dialog: AlertDialog?)
+    fun onComment(dialog: Dialog?)
 
-    fun onReject(dialog: AlertDialog?)
+    fun onReject(dialog: Dialog?)
 
-    fun onBackPress(dialog: AlertDialog?)
+    fun onBackPress(dialog: Dialog?)
 }
