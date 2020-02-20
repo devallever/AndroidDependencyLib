@@ -2,6 +2,7 @@ package com.allever.lib.ui.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,30 +16,37 @@ import androidx.annotation.IdRes;
 import androidx.appcompat.widget.AppCompatImageView;
 
 import com.allever.lib.common.util.DisplayUtils;
+import com.allever.lib.ui.R;
 
 public class CircleImageView extends AppCompatImageView {
 
     private Path mPath = new Path();
     private Paint mPaint = new Paint();
 
-    private int mBorderWidth = DisplayUtils.INSTANCE.dip2px(1);
-    private int mBorderColor = 0;
+    private int mBorderWidth;
+    private int mBorderColor;
 
     private PorterDuff.Mode mPorterDuffMode = PorterDuff.Mode.DST_IN;
     private Xfermode mXfermode = new PorterDuffXfermode(mPorterDuffMode);
 
     public CircleImageView(Context context) {
-        super(context);
-        init();
+        this(context, null);
     }
 
     public CircleImageView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
+        this(context, attrs, 0);
     }
 
     public CircleImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyleAttr, 0);
+
+        mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_civ_border_width, DisplayUtils.INSTANCE.dip2px(1));
+        mBorderColor = a.getColor(R.styleable.CircleImageView_civ_border_color, Color.WHITE);
+
+        a.recycle();
+
         init();
     }
 
@@ -52,7 +60,7 @@ public class CircleImageView extends AppCompatImageView {
     }
 
     private void init() {
-        mBorderColor = Color.parseColor("#ffffff");
+//        mBorderColor = Color.parseColor("#ffffff");
     }
 
     @Override

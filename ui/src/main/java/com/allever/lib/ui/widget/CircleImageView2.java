@@ -30,7 +30,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.RequiresApi;
 
-import com.allever.lib.common.R;
+import com.allever.lib.ui.R;
 
 /***
  * https://github.com/hdodenhof/CircleImageView
@@ -89,12 +89,12 @@ public class CircleImageView2 extends ImageView {
     public CircleImageView2(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView2, defStyle, 0);
 
-        mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_civ_border_width, DEFAULT_BORDER_WIDTH);
-        mBorderColor = a.getColor(R.styleable.CircleImageView_civ_border_color, DEFAULT_BORDER_COLOR);
-        mBorderOverlay = a.getBoolean(R.styleable.CircleImageView_civ_border_overlay, DEFAULT_BORDER_OVERLAY);
-        mCircleBackgroundColor = a.getColor(R.styleable.CircleImageView_civ_circle_background_color, DEFAULT_CIRCLE_BACKGROUND_COLOR);
+        mBorderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView2_civ2_border_width, DEFAULT_BORDER_WIDTH);
+        mBorderColor = a.getColor(R.styleable.CircleImageView2_civ2_border_color, DEFAULT_BORDER_COLOR);
+        mBorderOverlay = a.getBoolean(R.styleable.CircleImageView2_civ2_border_overlay, DEFAULT_BORDER_OVERLAY);
+        mCircleBackgroundColor = a.getColor(R.styleable.CircleImageView2_civ2_circle_background_color, DEFAULT_CIRCLE_BACKGROUND_COLOR);
 
         a.recycle();
 
