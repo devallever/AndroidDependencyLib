@@ -95,6 +95,21 @@ class MainActivity : BaseActivity() {
 
         start(mObjAnimatorList[mRandom?.nextInt(4)!!])
 
+
+        val list = ArrayList<String>()
+
+        list.add("3333")
+        list.add("1")
+        list.add("22222222222222222222222222222222222222222222")
+        list.add("清空万里")
+        list.add("两条相交线")
+        list.add("短途")
+        list.add("希望在明天会更好")
+
+        val autoAdapter = MyAutoAdapter(this)
+        autoAdapter.setData(list)
+        autoLayout.setAdapter(autoAdapter)
+
     }
 
     private var mCommentDialog: Dialog? = null

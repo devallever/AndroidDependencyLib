@@ -113,6 +113,11 @@
                 android:layout_height="wrap_content" />
         </FrameLayout>
 
+        <com.allever.lib.ui.widget.AutoLayout
+            android:id="@+id/autoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
 
     </LinearLayout>
 </ScrollView>
