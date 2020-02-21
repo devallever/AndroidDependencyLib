@@ -15,6 +15,8 @@ public class MyAutoAdapter extends AutoAdapter {
 
     private Context mContext;
 
+    private OnItemClickListener mListener;
+
     public MyAutoAdapter(Context context){
         mContext = context;
     }
@@ -42,10 +44,26 @@ public class MyAutoAdapter extends AutoAdapter {
     }
 
     @Override
-    public View getView(int position) {
+    public View getView(final int position) {
         View view = View.inflate(mContext, R.layout.item_tag, null);
         TextView tv = (TextView) view.findViewById(R.id.tv);
         tv.setText(mList.get(position));
+        if (mListener != null) {
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onItemClick(v, mList.get(position));
+                }
+            });
+        }
         return view;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, String text);
     }
 }

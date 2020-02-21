@@ -10,6 +10,7 @@ import com.allever.lib.comment.CommentDialog
 import com.allever.lib.comment.CommentHelper
 import com.allever.lib.comment.CommentListener
 import com.allever.lib.common.app.BaseActivity
+import com.allever.lib.common.util.toast
 import com.allever.lib.recommend.RecommendActivity
 import com.allever.lib.recommend.RecommendDialogHelper
 import com.allever.lib.recommend.RecommendDialogListener
@@ -107,6 +108,9 @@ class MainActivity : BaseActivity() {
         list.add("希望在明天会更好")
 
         val autoAdapter = MyAutoAdapter(this)
+        autoAdapter.setOnItemClickListener { view, text ->
+            toast(text)
+        }
         autoAdapter.setData(list)
         autoLayout.setAdapter(autoAdapter)
 
