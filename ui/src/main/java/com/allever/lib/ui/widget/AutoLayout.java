@@ -36,84 +36,94 @@ public class AutoLayout extends ViewGroup {
     }
 
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        mLines.clear();
-        //自身的padding
-        mPaddingTop = getPaddingTop();
-        mPaddingLeft = getPaddingLeft();
-        mPaddingRight = getPaddingRight();
-        mPaddingBottom = getPaddingBottom();
+    //标准写法
+//    @Override
+//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//        mLines.clear();
+//
+//        //自身的padding
+//        mPaddingTop = getPaddingTop();
+//        mPaddingLeft = getPaddingLeft();
+//        mPaddingRight = getPaddingRight();
+//        mPaddingBottom = getPaddingBottom();
+//
+//        int widthMeasureMode = MeasureSpec.getMode(widthMeasureSpec);
+//        int heightMeasureMode = MeasureSpec.getMode(heightMeasureSpec);
+//        int widthMeasureSize = MeasureSpec.getSize(widthMeasureSpec);
+//        int heightMeasureSize = MeasureSpec.getSize(heightMeasureSpec);
+//
+//        //通过计算获取的总行高(包括ViewGroup的padding和子View的margin)
+//        int totalHeight = 0;
+//        //最宽行的宽度
+//        int currentMaxWidth = 0;
+//        //当前行已占用的宽度
+//        int lineUsedWidth = 0;
+//        //计算时当前行的最大高度
+//        int currentMaxHeight = 0;
+//
+//        //每一行中View的数据集
+//        ArrayList<View> lineInfo = new ArrayList<>();
+//
+//        //获取子View的个数
+//        int childCount = getChildCount();
+//
+//        //遍历子View对其进行测算
+//        for (int i = 0; i < childCount; i++) {
+//            View childView = getChildAt(i);
+//
+//            //判断子View的显示状态 gone就不进行测算
+//            if (childView.getVisibility() == GONE) {
+//                continue;
+//            }
+//
+//            measureChild(childView, widthMeasureSpec, heightMeasureSpec);
+//
+//            MarginLayoutParams layoutParams = (MarginLayoutParams) childView.getLayoutParams();
+//
+//            int childWidth = 0;
+//            int childHeight = 0;
+//
+//            //第一个添加父布局的paddingLeft
+//            if (0 == i) {
+//                childWidth += mPaddingLeft;
+//            }
+//
+//            //获取view的测量宽度
+//            childWidth += childView.getMeasuredWidth() + (layoutParams.leftMargin + layoutParams.rightMargin);
+//
+//            //当前的行高
+//            childHeight = childHeight + (childView.getMeasuredHeight() + layoutParams.topMargin + layoutParams.bottomMargin);
+//
+//            //当前行放不下时，重起一行显示
+//
+//            if (lineUsedWidth + childWidth > widthMeasureSize - mPaddingRight) {
+//                //初始当前行的宽度
+//                lineUsedWidth = childWidth + mPaddingLeft;
+//                //添加一次行高
+//                totalHeight += currentMaxHeight;
+//                //初始化行高
+//                currentMaxHeight = childHeight;
+//                mLines.add(lineInfo);
+//                lineInfo = new ArrayList<>();
+//                lineInfo.add(childView);
+//            } else {//当前行可以显示时
+//                lineInfo.add(childView);
+//                //增加当前行已显示的宽度
+//                lineUsedWidth += childWidth;
+//                //为了显示最大的行高
+//                currentMaxHeight = Math.max(currentMaxHeight, childHeight);
+//                //显示中最大的行宽
+//                currentMaxWidth = Math.max(currentMaxWidth, lineUsedWidth);
+//            }
+//        }
+//        mLines.add(lineInfo);
+//        totalHeight += (mPaddingTop + mPaddingBottom + currentMaxHeight);
+//        setMeasuredDimension(
+//                (widthMeasureMode == MeasureSpec.EXACTLY) ? widthMeasureSize : currentMaxWidth + mPaddingRight,
+//                (heightMeasureMode == MeasureSpec.EXACTLY) ? heightMeasureSize : totalHeight
+//        );
+//    }
 
-        int widthMeasureMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMeasureMode = MeasureSpec.getMode(heightMeasureSpec);
-        int widthMeasureSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightMeasureSize = MeasureSpec.getSize(heightMeasureSpec);
-
-        //通过计算获取的总行高(包括ViewGroup的padding和子View的margin)
-        int totalHeight = 0;
-        //最宽行的宽度
-        int currentMaxWidth = 0;
-        //当前行已占用的宽度
-        int lineUsedWidth = 0;
-        //计算时当前行的最大高度
-        int currentMaxHeight = 0;
-        //每一行中View的数据集
-        ArrayList<View> lineInfo = new ArrayList<>();
-        //获取子View的个数
-        int childCount = getChildCount();
-        //遍历子View对其进行测算
-        for (int i = 0; i < childCount; i++) {
-            View childView = getChildAt(i);
-            //判断子View的显示状态 gone就不进行测算
-            if (childView.getVisibility() == GONE) {
-                continue;
-            }
-            measureChild(childView, widthMeasureSpec, heightMeasureSpec);
-            MarginLayoutParams layoutParams = (MarginLayoutParams) childView.getLayoutParams();
-            int childWidth = 0;
-            int childHeight = 0;
-            //获取view的测量宽度
-            childWidth += childView.getMeasuredWidth();
-            //每行的第一个添加父布局的paddingLeft
-            if (0 == i) {
-                childWidth += mPaddingLeft;
-            }
-            //获取子View自身的margin属性
-            childWidth += (layoutParams.leftMargin + layoutParams.rightMargin);
-            //当前的行高
-            childHeight = childHeight + (childView.getMeasuredHeight() + layoutParams.topMargin + layoutParams.bottomMargin);
-
-            //当前行放不下时，重起一行显示
-            if (lineUsedWidth + childWidth > widthMeasureSize - mPaddingRight) {
-                //初始当前行的宽度
-                lineUsedWidth = childWidth + mPaddingLeft;
-                //添加一次行高
-                totalHeight += currentMaxHeight;
-                //初始化行高
-                currentMaxHeight = childHeight;
-                mLines.add(lineInfo);
-                lineInfo = new ArrayList<>();
-                lineInfo.add(childView);
-            } else {//当前行可以显示时
-                lineInfo.add(childView);
-                //增加当前行已显示的宽度
-                lineUsedWidth += childWidth;
-                //为了显示最大的行高
-                currentMaxHeight = Math.max(currentMaxHeight, childHeight);
-                //显示中最大的行宽
-                currentMaxWidth = Math.max(currentMaxWidth, lineUsedWidth);
-            }
-        }
-        mLines.add(lineInfo);
-        totalHeight += (mPaddingTop + mPaddingBottom + currentMaxHeight);
-        setMeasuredDimension(
-                (widthMeasureMode == MeasureSpec.EXACTLY) ? widthMeasureSize : currentMaxWidth + mPaddingRight,
-                (heightMeasureMode == MeasureSpec.EXACTLY) ? heightMeasureSize : totalHeight
-        );
-    }
-
-    /**
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -183,9 +193,9 @@ public class AutoLayout extends ViewGroup {
                 totalHeight = totalHeight + currentMaxHeight;
                 currentMaxHeight = childHeight;
 
+                mLines.add(lineInfo);
                 lineInfo = new ArrayList<>();
                 lineInfo.add(childView);
-                mLines.add(lineInfo);
             } else {
                 //不换行
 
@@ -227,9 +237,6 @@ public class AutoLayout extends ViewGroup {
 
         setMeasuredDimension(resultWidth, resultHeight);
     }
-     *
-     **/
-
 
 
     @Override
