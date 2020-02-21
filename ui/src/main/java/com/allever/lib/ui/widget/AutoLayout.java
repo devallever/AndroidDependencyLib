@@ -8,6 +8,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author allever
+ * @参考 Android 中自动换行的标签实现
+ * @link https://blog.csdn.net/TianFB/article/details/76640800
+ */
 public class AutoLayout extends ViewGroup {
 
     private int mPaddingLeft;
