@@ -20,6 +20,7 @@ object SystemUtils {
      */
     fun chooseImageFromGallery(activity: Activity, requestCode: Int) {
         val albumIntent = Intent(Intent.ACTION_PICK)
+        albumIntent.type = "image/*"
         albumIntent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         activity.startActivityForResult(albumIntent, requestCode)
     }
