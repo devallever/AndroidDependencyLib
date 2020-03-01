@@ -7,6 +7,7 @@ import com.google.gson.Gson
 import rx.Subscriber
 import java.io.File
 import java.lang.Exception
+import java.util.*
 
 object RecommendGlobal {
 
@@ -114,6 +115,18 @@ object RecommendGlobal {
                 item.url
             }
         }
+    }
+
+    fun getRandomItem(): Recommend? {
+        if (recommendData.isEmpty()) {
+            return null
+        }
+
+        val random = Random()
+        val index = random.nextInt(recommendData.size)
+        log("推荐总数： ${recommendData.size}, 随机: $index")
+
+        return recommendData[index]
     }
 
     private fun handleChannelRecommendData(data: RecommendBean?, channel: String) {
