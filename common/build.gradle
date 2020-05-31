@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
@@ -26,8 +26,9 @@ android {
 }
 
 ext {
-    kotlin_version = '1.3.30'
-    androidx_version = '1.0.0'
+    kotlin_version = '1.3.72'
+    androidx_version = '1.1.0'
+    androidx_version_other = '1.0.0'
     anko_version = '0.10.8'
 }
 
@@ -43,9 +44,9 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api "androidx.appcompat:appcompat:$androidx_version"
     api "com.google.android.material:material:$androidx_version"
-    api "androidx.cardview:cardview:$androidx_version"
+    api "androidx.cardview:cardview:$androidx_version_other"
     api "androidx.recyclerview:recyclerview:$androidx_version"
-    api "androidx.legacy:legacy-support-v4:$androidx_version"
+    api "androidx.legacy:legacy-support-v4:$androidx_version_other"
     api 'androidx.test:runner:1.2.0'
     testApi 'junit:junit:4.12'
     androidTestApi 'androidx.test.espresso:espresso-core:3.2.0'
