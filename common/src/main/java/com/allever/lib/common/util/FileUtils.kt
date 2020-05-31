@@ -211,7 +211,7 @@ object FileUtils {
         var cursor: Cursor? = null
         try {
             cursor =
-                context.contentResolver.query(uri, projection, selection, selectionArgs, null)
+                context.contentResolver.query(uri!!, projection, selection, selectionArgs, null)
             if (cursor != null && cursor.moveToFirst()) {
                 val columnIndex = cursor.getColumnIndexOrThrow(projection[0])
                 path = cursor.getString(columnIndex)

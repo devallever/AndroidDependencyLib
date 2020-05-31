@@ -6,6 +6,6 @@ import com.allever.lib.recommend.RecommendGlobal
 class MyApp: App() {
     override fun onCreate() {
         super.onCreate()
-        RecommendGlobal.init("google")
+        RecommendGlobal.init("baidu")
     }
 }

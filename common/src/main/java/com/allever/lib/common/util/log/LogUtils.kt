@@ -9,7 +9,7 @@ object LogUtils {
     }
 
     fun d(tag: String, msg: String) {
-        mProxy.d(msg)
+        mProxy.d(tag, msg)
     }
 
     fun d(msg: String) {

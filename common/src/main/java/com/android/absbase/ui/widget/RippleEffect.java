@@ -139,9 +139,9 @@
 //                drawingBounds.union(rippleBounds);
 //            }
 //
-//            RippleBackground background = this.mBackground;
-//            if (background != null) {
-//                background.getBounds(rippleBounds);
+//            RippleBackground memory_game_background = this.mBackground;
+//            if (memory_game_background != null) {
+//                memory_game_background.getBounds(rippleBounds);
 //                rippleBounds.offset(cX, cY);
 //                drawingBounds.union(rippleBounds);
 //            }
@@ -169,9 +169,9 @@
 //
 //    private void drawBackgroundAndRipples(Canvas canvas) {
 //        Ripple active = this.mRipple;
-//        RippleBackground background = this.mBackground;
+//        RippleBackground memory_game_background = this.mBackground;
 //        int count = this.mExitingRipplesCount;
-//        if (active != null || count > 0 || background != null && background.shouldDraw()) {
+//        if (active != null || count > 0 || memory_game_background != null && memory_game_background.shouldDraw()) {
 //            float x = this.mHotspotBounds.exactCenterX();
 //            float y = this.mHotspotBounds.exactCenterY();
 //            canvas.translate(x, y);
@@ -195,8 +195,8 @@
 //                p.setShader((Shader)null);
 //            }
 //
-//            if (background != null && background.shouldDraw()) {
-//                background.draw(canvas, p);
+//            if (memory_game_background != null && memory_game_background.shouldDraw()) {
+//                memory_game_background.draw(canvas, p);
 //            }
 //
 //            if (count > 0) {

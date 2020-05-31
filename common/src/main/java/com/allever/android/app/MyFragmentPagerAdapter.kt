@@ -5,5 +5,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 
 abstract class MyFragmentPagerAdapter: FragmentPagerAdapter {
-    constructor(fm: FragmentManager?) : super(fm)
+    constructor(fm: FragmentManager) : super(
+        fm,
+        BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    )
 }

@@ -110,7 +110,7 @@ class BaseViewHolder(private val mContext: Context, itemView: View) :
     }
 
     fun linkify(viewId: Int): BaseViewHolder {
-        val view = getView<TextView>(viewId)
+        val view = getView<TextView>(viewId)?:return this
         Linkify.addLinks(view, Linkify.ALL)
         return this
     }

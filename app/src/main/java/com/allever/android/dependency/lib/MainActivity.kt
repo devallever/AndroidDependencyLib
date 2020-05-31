@@ -114,6 +114,14 @@ class MainActivity : BaseActivity() {
         autoAdapter.setData(list)
         autoLayout.setAdapter(autoAdapter)
 
+        val url = "https://shouji.baidu.com/software/26799705.html"
+        recommendImageView.setRecommendData(R.drawable.ic_logo, "com.allever.app.virtual.call", url)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        recommendImageView.refresh()
     }
 
     private var mCommentDialog: Dialog? = null

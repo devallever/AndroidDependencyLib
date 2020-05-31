@@ -1,7 +1,8 @@
 package com.allever.lib.common.util
 
-import android.content.Context
+import android.app.Service
 import android.util.DisplayMetrics
+import android.view.WindowManager
 import com.allever.lib.common.app.App
 
 /**
@@ -39,6 +40,12 @@ object DisplayUtils {
         return result
     }
 
+    fun dip2px(dip: Float): Int {
+        val density = App.context.resources.displayMetrics.density
+        val result = (dip * density + 0.5f).toInt()
+        return result
+    }
+
     fun px2sp(px: Int): Int {
         val scaledDensity = App.context.resources.displayMetrics.scaledDensity
         return (px / scaledDensity + 0.5f).toInt()
@@ -55,5 +62,20 @@ object DisplayUtils {
 
     fun getDisplayMetrics(): DisplayMetrics {
         return App.context.resources.displayMetrics
+    }
+
+    fun getScreenWidth(): Int {
+        return getScreenRealMetrics().widthPixels
+    }
+
+    fun getScreenHeight(): Int {
+        return getScreenRealMetrics().heightPixels
+    }
+
+    private fun getScreenRealMetrics(): DisplayMetrics {
+        val displayMetrics = DisplayMetrics()
+        val wm = App.context.getSystemService(Service.WINDOW_SERVICE) as? WindowManager
+        wm?.defaultDisplay?.getRealMetrics(displayMetrics)
+        return displayMetrics
     }
 }
