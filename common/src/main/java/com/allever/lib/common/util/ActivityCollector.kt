@@ -65,6 +65,12 @@ object ActivityCollector {
         context.startActivity(intent)
     }
 
+    inline fun <reified T> startActivity(context: Context, block: Intent.() -> Unit) {
+        val intent = Intent(context, T::class.java)
+        intent.block()
+        context.startActivity(intent)
+    }
+
     fun <T: Activity> startActivityForResult(context: Activity, clazz: Class<T>, requestCode: Int) {
         val intent = Intent(context, clazz)
         context.startActivityForResult(intent, requestCode)

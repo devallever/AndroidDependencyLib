@@ -10,6 +10,7 @@ import com.allever.lib.comment.CommentDialog
 import com.allever.lib.comment.CommentHelper
 import com.allever.lib.comment.CommentListener
 import com.allever.lib.common.app.BaseActivity
+import com.allever.lib.common.util.ActivityCollector
 import com.allever.lib.common.util.toast
 import com.allever.lib.recommend.RecommendActivity
 import com.allever.lib.recommend.RecommendDialogHelper
@@ -116,6 +117,15 @@ class MainActivity : BaseActivity() {
 
         val url = "https://shouji.baidu.com/software/26799705.html"
         recommendImageView.setRecommendData(R.drawable.ic_logo, "com.allever.app.virtual.call", url)
+
+        btnStart.setOnClickListener {
+            ActivityCollector.startActivity<SecondActivity>(this) {
+                putExtra("extra_a", 1)
+                putExtra("extra_b", "hello")
+            }
+
+            SecondActivity.start(this, 1, "hello")
+        }
 
     }
 
