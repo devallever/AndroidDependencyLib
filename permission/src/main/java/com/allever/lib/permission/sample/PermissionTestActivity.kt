@@ -3,7 +3,6 @@ package com.allever.lib.permission.sample
 import android.Manifest
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.allever.lib.common.app.App
 import com.allever.lib.common.util.DLog
 import com.allever.lib.common.util.ToastUtils
 import com.allever.lib.permission.PermissionListener
@@ -14,7 +13,7 @@ class PermissionTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permission_test)
-        PermissionManager.request(object : PermissionListener {
+        PermissionManager.request(this, object : PermissionListener {
             override fun onGranted(grantedList: MutableList<String>) {
                 ToastUtils.show("onGranted")
                 DLog.d("onGranted")
