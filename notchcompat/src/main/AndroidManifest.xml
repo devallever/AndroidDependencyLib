@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.allever.lib.notchcompat">
+
+
+    <application>
+<!--        &lt;!&ndash;   小米     &ndash;&gt;-->
+<!--        <meta-data-->
+<!--            android:name="notch.config"-->
+<!--            android:value="portrait|landscape" />-->
+
+<!--        &lt;!&ndash;    华为    &ndash;&gt;-->
+<!--        <meta-data-->
+<!--            android:name="android.notch_support"-->
+<!--            android:value="true" />-->
+    </application>
+</manifest>

@@ -8,11 +8,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
-import com.allever.lib.common.BuildConfig
 import com.allever.lib.common.app.App
-import java.util.*
 
 object SystemUtils {
     /**
@@ -79,4 +76,22 @@ object SystemUtils {
         log("$key - $msg")
         return msg?:""
     }
+
+    /**
+     * 获取状态栏高度
+     *
+     * @param context
+     * @return
+     */
+    fun getStatusBarHeight(context: Context): Int {
+        var statusBarHeight = 0
+        val resourceId: Int =
+            context.resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            statusBarHeight = context.resources.getDimensionPixelSize(resourceId)
+        }
+
+        return statusBarHeight
+    }
+
 }

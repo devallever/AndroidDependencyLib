@@ -13,6 +13,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -37,4 +39,5 @@ dependencies {
     implementation project(path: ':ui')
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation project(path: ':notchcompat')
 }
