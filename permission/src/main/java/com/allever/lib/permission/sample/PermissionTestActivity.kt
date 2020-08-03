@@ -13,7 +13,7 @@ class PermissionTestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_permission_test)
-        PermissionManager.request(this, object : PermissionListener {
+        PermissionManager.request( object : PermissionListener {
             override fun onGranted(grantedList: MutableList<String>) {
                 ToastUtils.show("onGranted")
                 DLog.d("onGranted")

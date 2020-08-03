@@ -3,12 +3,29 @@ package com.allever.lib.permission
 import android.app.Activity
 import android.content.DialogInterface
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import com.allever.lib.common.app.App
+import com.yanzhenjie.permission.AndPermission
 
 object PermissionManager {
+    fun request(listener: PermissionListener, vararg permissions: String) {
+        AndPermission.with(App.context)
+            .runtime()
+            .permission(permissions)
+            .onGranted {
+                listener.onGranted(it)
+            }
+            .onDenied {
+                if (AndPermission.hasAlwaysDeniedPermission(App.context, it)) {
+                    listener.alwaysDenied(it)
+                } else {
+                    listener.onDenied(it)
+                }
+            }
+            .start()
+    }
+
     fun request(
-        activity: Activity,
+        activity: Activity?,
         listener: PermissionListener,
         vararg permissions: String
     ) {

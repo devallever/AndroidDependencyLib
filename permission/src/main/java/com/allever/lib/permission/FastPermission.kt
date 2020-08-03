@@ -20,7 +20,7 @@ object FastPermission {
     private val PERMISSION_FRAGMENT_TAG = PermissionFragment::class.java.simpleName
 
     fun request(
-        activity: Activity,
+        activity: Activity?,
         listener: PermissionListener?,
         vararg permissions: String
     ) {
@@ -33,7 +33,7 @@ object FastPermission {
             fragmentManager?.beginTransaction()?.add(
                 newFragment,
                 PERMISSION_FRAGMENT_TAG
-            )?.commitNow()
+            )?.commit()
             newFragment
         } else {
             fragment as? PermissionFragment
