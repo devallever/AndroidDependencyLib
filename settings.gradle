@@ -1,5 +1,5 @@
 include ':notchcompat'
-include ':app', ':common', ':permission', ':imageloader', ':glideloader', ':httpsglide',':umeng', ':recommend', ':comment', ':ui'
+include ':app', ':common', ':permission', ':imageloader', ':glideloader', ':httpsglide', ':umeng', ':recommend', ':comment', ':ui'
 
 
 include ':widget'

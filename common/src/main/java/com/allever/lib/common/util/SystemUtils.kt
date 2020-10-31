@@ -1,12 +1,15 @@
 package com.allever.lib.common.util
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.KeyguardManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.PowerManager
 import android.provider.MediaStore
 import android.widget.Toast
 import com.allever.lib.common.app.App
@@ -92,6 +95,26 @@ object SystemUtils {
         }
 
         return statusBarHeight
+    }
+
+    @SuppressLint("InvalidWakeLockTag")
+    fun wakeUpAndUnlock(context: Context) {
+        //屏锁管理器
+        val km = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+        val kl = km.newKeyguardLock("unLock")
+        //解锁
+        kl.disableKeyguard()
+        //获取电源管理器对象
+        val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+        //获取PowerManager.WakeLock对象,后面的参数|表示同时传入两个值,最后的是LogCat里用的Tag
+        val wl = pm.newWakeLock(
+            PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.SCREEN_DIM_WAKE_LOCK,
+            "bright"
+        )
+        //点亮屏幕
+        wl.acquire(10*60*1000L /*10 minutes*/)
+        //释放
+        wl.release()
     }
 
 }

@@ -1,6 +1,7 @@
 package com.allever.lib.common.util
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.allever.lib.common.R
@@ -11,7 +12,7 @@ object FeedbackHelper {
     private val FEEDBACK_TO = "devallever@163.com"
     private val SUBJECT = ""
 
-    fun feedback(activity: Activity?) {
+    fun feedback(activity: Context?) {
         // 必须明确使用mailto前缀来修饰邮件地址,如果使用
         // intent.putExtra(Intent.EXTRA_EMAIL, email)，结果将匹配不到任何应用
         val uri = Uri.parse("mailto:" + FEEDBACK_TO)
