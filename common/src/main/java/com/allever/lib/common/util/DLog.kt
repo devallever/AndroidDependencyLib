@@ -8,11 +8,11 @@ object DLog {
     private val TAG = DLog::class.java.simpleName
 
 
-    fun d(msg: String?) {
+    fun d(msg: String = "") {
         d(TAG, msg)
     }
 
-    fun d(tag: String, msg: String?) {
+    fun d(tag: String, msg: String = "") {
         if (BuildConfig.DEBUG) {
             Log.d(tag, msg)
         }
@@ -22,7 +22,7 @@ object DLog {
         e(TAG, msg)
     }
 
-    fun e(tag: String, msg: String?) {
+    fun e(tag: String, msg: String) {
         if (BuildConfig.DEBUG) {
             Log.e(tag, msg)
         }
