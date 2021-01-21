@@ -9,12 +9,14 @@ object RLog {
     fun d(msg: String) = d(TAG, msg)
 
     fun d(tag: String, msg: String?) {
+        msg ?: return
         Log.d(tag, msg)
     }
 
     fun e(msg: String) = e(TAG, msg)
 
     fun e(tag: String, msg: String?) {
+        msg ?: return
         Log.e(tag, msg)
     }
 
